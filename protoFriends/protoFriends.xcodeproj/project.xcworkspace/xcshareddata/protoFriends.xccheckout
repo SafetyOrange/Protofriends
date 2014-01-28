@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>74B4B35A-D16A-4EDB-8277-4AF1199B02E7</string>
+	<key>IDESourceControlProjectName</key>
+	<string>protoFriends</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>0C735F3F-DD4C-4695-89B5-A228FEB23056</key>
+		<string>https://github.com/underdoeg/ofxGamepad.git</string>
+		<key>6CFDFB99-AAFD-42BE-B596-376204910AC8</key>
+		<string>https://github.com/SafetyOrange/Thesis.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>protoFriends/protoFriends.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>0C735F3F-DD4C-4695-89B5-A228FEB23056</key>
+		<string>../../../../../addons/ofxGamepad</string>
+		<key>6CFDFB99-AAFD-42BE-B596-376204910AC8</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/SafetyOrange/Thesis.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>6CFDFB99-AAFD-42BE-B596-376204910AC8</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>0C735F3F-DD4C-4695-89B5-A228FEB23056</string>
+			<key>IDESourceControlWCCName</key>
+			<string>ofxGamepad</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>6CFDFB99-AAFD-42BE-B596-376204910AC8</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Thesis</string>
+		</dict>
+	</array>
+</dict>
+</plist>
