@@ -27,7 +27,7 @@ void Player::prime(int _index){
     pos.x= (index+1)* (.17* ofGetWidth());
     pos.y= ofGetHeight()/3;
     
-    setPhysics(1.f, 0.f, 1);
+  //  setPhysics(1.f, 0.f, 1);
     
 }
 
@@ -57,17 +57,14 @@ void Player::move(float xVal){
     if(!dead){
     
         dX=ofMap(xVal, 0, 1, 0, speed);
-//    dY=ofMap(yVal, 0, 1, 0, speed);
-        ///FIX THIS!!!!!
-        if(xVal!=0){
-        addForce(ofVec2f(xVal, 0), 100);
-        }
-        else{
-        body->SetLinearVelocity(b2Vec2(0,dY));
-        }
+        
+            float velChange = dX - getVelocity().x;
+            float impulse = body->GetMass() * velChange;
+            body->ApplyLinearImpulse( b2Vec2(impulse,0), body->GetWorldCenter(), false );
     }
 }
 
 void Player::jump(float yVal){
-    addForce(ofVec2f(0, yVal), 50);
+    
+    setVelocity(body->GetLinearVelocity().x, yVal);
     }

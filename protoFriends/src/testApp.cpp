@@ -11,7 +11,7 @@ void testApp::setup(){
 
     box2d.init();
     box2d.setFPS(60);
-	box2d.setGravity(0, 10);
+	box2d.setGravity(0, 55);
     box2d.createBounds();
     
     
@@ -37,14 +37,16 @@ void testApp::setup(){
     
 //    b2Vec2 derp = screenPtToWorldPt(ofVec2f(ofGetWidth(), ofGetHeight()));
 //    ofLog()<< derp.x << "  " << derp.y << endl;
-    ground.setPhysics(0.f, 0, 1);
+    ground.setPhysics(0.f, 0, 0);
     ground.setup(box2d.getWorld(), ofGetWidth()/2, ofGetHeight()*.9, ofGetWidth(), ofGetHeight()*.5);
     
-    player1.setPhysics(1.f, 0.1, 0); // Density, Bounce, Friction 0.f density makes shape static.
+    player1.setPhysics(2.f, 0.1, 0); // Density, Bounce, Friction.   0.f density makes shape static.
     player1.setup(box2d.getWorld(), player1.pos.x, player1.pos.y, player1.w, player1.h);
+  //  player1.body->SetGravityScale(4);
     
-    player2.setPhysics(1.f, 0.1, 0); // 0.f density makes shape static.
+    player2.setPhysics(2.f, 0.1, 0); // 0.f density makes shape static.
     player2.setup(box2d.getWorld(), player2.pos.x, player2.pos.y, player2.w, player2.h);
+  //  player2.body->SetGravityScale(4);
     
     box2d.enableGrabbing();
     box2d.registerGrabbing();
@@ -127,7 +129,7 @@ void testApp::buttonPressed(ofxGamepadButtonEvent &e){
 //--------------------------------------------------------------
 void testApp::buttonReleased(ofxGamepadButtonEvent &e){
     
-    if(e.button==11)player1.jump(-10);
+    if(e.button==11)player1.jump(-25);
     
 }
 //--------------------------------------------------------------
@@ -137,10 +139,10 @@ void testApp::axisChanged2(ofxGamepadAxisEvent &e){
         
         //LEFT JOYSTICK
         if (e.axis == 2)    mVal2.x=e.value;
-        if (e.axis == 3)    mVal2.y=e.value;
+  //      if (e.axis == 3)    mVal2.y=e.value;
         
         if (abs(mVal2.x)<stickBuffer)  mVal2.x=0;
-        if (abs(mVal2.y)<stickBuffer)  mVal2.y=0;
+ //       if (abs(mVal2.y)<stickBuffer)  mVal2.y=0;
         
         
        // player2.move(mVal2.x,mVal2.y);
