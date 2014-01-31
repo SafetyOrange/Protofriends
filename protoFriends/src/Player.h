@@ -26,9 +26,10 @@ public:
     float h;
     float angle;
     void prime(int _index);
-    ofVec2f pos;
     
+    bool primate;
     bool dead;
+    bool grounded;
     
     void myUpdate();
     void myDraw();
@@ -36,7 +37,7 @@ public:
     void jump(float yVal);
 
 
-    
+    ofVec2f pos;
     ofVec2f pCenter = ofVec2f(ofGetWidth()/2, ofGetHeight()/2);
-    
+
 };

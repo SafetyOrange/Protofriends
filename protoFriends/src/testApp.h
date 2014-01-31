@@ -43,6 +43,10 @@ class testApp : public ofBaseApp{
     void buttonPressed2(ofxGamepadButtonEvent &e);
     void buttonReleased2(ofxGamepadButtonEvent &e);
     
+    // this is the function for contacts
+	void contactStart(ofxBox2dContactArgs &e);
+	void contactEnd(ofxBox2dContactArgs &e);
+    
     ofxBox2d box2d;
     ofxBox2dRect ground;
 };
