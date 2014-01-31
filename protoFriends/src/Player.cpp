@@ -42,7 +42,9 @@ void Player::myUpdate(){
     //Make sure we're not falling/flying
     if(abs(body->GetLinearVelocity().y)>0){
         grounded=false;
-        ofLog()<<"Arf"<<endl;
+    }
+    else{
+        grounded=true;
     }
     
     
@@ -75,11 +77,11 @@ void Player::move(float xVal){
         float impulse = body->GetMass() * velChange;
         body->ApplyLinearImpulse( b2Vec2(impulse,0), body->GetWorldCenter(), true );
         
-        if(grounded){
-            b2Vec2 pos = body->GetPosition();
-            pos.y-=.5;
-            body->SetTransform(pos, body->GetAngle());
-        }
+//        if(grounded){
+//            b2Vec2 pos = body->GetPosition();
+//            pos.y-=.5;
+//            body->SetTransform(pos, body->GetAngle());
+//        }
         
         
         

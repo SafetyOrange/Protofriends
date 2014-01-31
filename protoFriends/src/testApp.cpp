@@ -187,33 +187,33 @@ void testApp::mouseReleased(int x, int y, int button){
 //--------------------------------------------------------------
 
 void testApp::contactStart(ofxBox2dContactArgs &e) {
-	if(e.a != NULL && e.b != NULL) {
-          //0x0 = NOTHING
-          //0x1 = player 1
-//        //0x2 = player 2
-//        //0x3 = ground
-//        //0x4 =
-//        //0x5 =
-//        //0x6 =
-        
-        ofLog()<<"Contact"<<endl;
-        
-        
-        if((int)e.b->GetBody()->GetUserData()==0x3 && (int)e.a->GetBody()->GetUserData()!=0x1) { //player 1
-            player1.grounded=true;
-        }
-        if((int)e.a->GetBody()->GetUserData()==0x3 && (int)e.b->GetBody()->GetUserData()!=0x1){  //player 1
-            player1.grounded=true;
-        }
-        
-        if((int)e.b->GetBody()->GetUserData()==0x3 && (int)e.a->GetBody()->GetUserData()!=0x2) { //player 2
-            player2.grounded=true;
-        }
-        if((int)e.a->GetBody()->GetUserData()==0x3 && (int)e.b->GetBody()->GetUserData()!=0x2){  //player 2
-            player2.grounded=true;
-        }
-		
-	}
+//	if(e.a != NULL && e.b != NULL) {
+//          //0x0 = NOTHING
+//          //0x1 = player 1
+////        //0x2 = player 2
+////        //0x3 = ground
+////        //0x4 =
+////        //0x5 =
+////        //0x6 =
+//        
+//        ofLog()<<"Contact"<<endl;
+//        
+//        
+//        if((int)e.b->GetBody()->GetUserData()==0x3 && (int)e.a->GetBody()->GetUserData()!=0x1) { //player 1
+//            player1.grounded=true;
+//        }
+//        if((int)e.a->GetBody()->GetUserData()==0x3 && (int)e.b->GetBody()->GetUserData()!=0x1){  //player 1
+//            player1.grounded=true;
+//        }
+//        
+//        if((int)e.b->GetBody()->GetUserData()==0x3 && (int)e.a->GetBody()->GetUserData()!=0x2) { //player 2
+//            player2.grounded=true;
+//        }
+//        if((int)e.a->GetBody()->GetUserData()==0x3 && (int)e.b->GetBody()->GetUserData()!=0x2){  //player 2
+//            player2.grounded=true;
+//        }
+//		
+//	}
 }
 
 //--------------------------------------------------------------
