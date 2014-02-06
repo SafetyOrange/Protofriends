@@ -42,11 +42,11 @@ void Player::myUpdate(){
     //Make sure we're not falling/flying
     if(abs(body->GetLinearVelocity().y)>0){
         grounded=false;
+        friendMode=false;
     }
     else{
         grounded=true;
     }
-    
     
 
 }
@@ -67,29 +67,42 @@ void Player::myDraw(){
     }
 }
 
-void Player::move(float xVal){
-    
-    if(!dead){
+void Player::move(float xVal, float yVal){
         
-        dX=ofMap(xVal, 0, 1, 0, speed);
+        
+    dX=ofMap(xVal, 0, 1, 0, speed);
+    dY=yVal;
+    
+    //P2P INTERACTIONS
+    if(friendMode){
+        
+        //@@ Movement Code
+        float velChange = dX - getVelocity().x;
+        float impulse = body->GetMass() * velChange;
+        body->ApplyLinearImpulse( b2Vec2(impulse,0), body->GetWorldCenter(), true );
+        //@@
+        
+        if(dY<0){
+            vault=true;
+        }if(abs(dX)>0){
+            grab=true;
+        }
+        
+    }/// NORMAL MOVEMENT
+    else if(!friendMode){
+        vault=false;
+        net=false;
+        toss=false;
+        grab=false;
         
         float velChange = dX - getVelocity().x;
         float impulse = body->GetMass() * velChange;
         body->ApplyLinearImpulse( b2Vec2(impulse,0), body->GetWorldCenter(), true );
         
-//        if(grounded){
-//            b2Vec2 pos = body->GetPosition();
-//            pos.y-=.5;
-//            body->SetTransform(pos, body->GetAngle());
-//        }
-        
-        
-        
     }
-
 }
 
-void Player::jump(float yVal){
+void Player::jump(float amt){
     
-    setVelocity(body->GetLinearVelocity().x, yVal);
+    setVelocity(body->GetLinearVelocity().x, amt);
 }

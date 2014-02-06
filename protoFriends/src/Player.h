@@ -33,8 +33,16 @@ public:
     
     void myUpdate();
     void myDraw();
-    void move(float xVal);
-    void jump(float yVal);
+    void move(float xVal, float yVal);
+    void jump(float amt);
+    
+    
+    bool friendMode;
+    bool vault;
+    bool net;
+    bool lift;
+    bool toss;
+    bool grab;
 
 
     ofVec2f pos;

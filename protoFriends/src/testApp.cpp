@@ -65,8 +65,9 @@ void testApp::update(){
     player1.myUpdate();
     player2.myUpdate();
     
-    player1.move(mVal.x);
-    player2.move(mVal2.x);
+    player1.move(mVal.x, mVal.y);
+    player2.move(mVal2.x, mVal2.y);
+    p2p();
 
    
 }
@@ -117,10 +118,10 @@ void testApp::axisChanged(ofxGamepadAxisEvent &e) {
         
         //LEFT JOYSTICK
         if (e.axis == 2)    mVal.x=e.value;
-     //   if (e.axis == 3)    mVal.y=e.value;
+        if (e.axis == 3)    mVal.y=e.value;
         
         if (abs(mVal.x)<stickBuffer)  mVal.x=0;
-    //    if (abs(mVal.y)<stickBuffer)  mVal.y=0;
+        if (abs(mVal.y)<stickBuffer)  mVal.y=0;
         
         
         
@@ -130,13 +131,18 @@ void testApp::axisChanged(ofxGamepadAxisEvent &e) {
 //--------------------------------------------------------------
 void testApp::buttonPressed(ofxGamepadButtonEvent &e){
     
+    //This is actually button RELEASED
+    if(e.button==12) player1.friendMode=false;
+    
     
 }
 //--------------------------------------------------------------
 void testApp::buttonReleased(ofxGamepadButtonEvent &e){
     
-
-    if(e.button==11 && player1.grounded)player1.jump(-25);
+    //This is actually button PRESSED
+    
+    if(e.button==11 && player1.grounded)player1.jump(-15);          // A Button
+    if(e.button==12) player1.friendMode=true;                      // B Button
     
 }
 //--------------------------------------------------------------
@@ -157,7 +163,7 @@ void testApp::axisChanged2(ofxGamepadAxisEvent &e){
 //--------------------------------------------------------------
 void testApp::buttonPressed2(ofxGamepadButtonEvent &e){
     
-    if(e.button==11 && player2.grounded)player2.jump(-25);
+    if(e.button==11 && player2.grounded)player2.jump(-15);
 
 }
 //--------------------------------------------------------------
@@ -165,6 +171,78 @@ void testApp::buttonReleased2(ofxGamepadButtonEvent &e){
     
 }
 //--------------------------------------------------------------
+void testApp::p2p(){
+    
+    if(player1.friendMode || player2.friendMode){
+        
+        if(ofDist(player1.body->GetPosition().x,
+                  player1.body->GetPosition().y,
+                  player2.body->GetPosition().x,
+                  player2.body->GetPosition().y) < 2){
+            
+            //Vaulting
+            if(player1.vault){
+                player2.jump(-30);
+            }
+            if(player2.vault){
+                player1.jump(-30);
+            }
+            
+            //Hand Holding
+            if(player1.grab || player2.grab){
+                if(!breakJ){
+                    b2RopeJointDef jointDef;
+                    
+                    jointDef.bodyA=player1.body;
+                    jointDef.bodyB=player2.body;
+                    jointDef.localAnchorA.SetZero();
+                    jointDef.localAnchorB.SetZero();
+                    jointDef.maxLength=1;
+                    jointDef.collideConnected=false;
+                    
+                    joint=(b2RopeJoint*)box2d.world->CreateJoint(&jointDef);
+                    breakJ=true;
+                } else{
+                    if(breakJ==true){
+                        //                    player1.grab=false;
+                        //                    player2.grab=false;
+                        box2d.world->DestroyJoint(joint);
+                       // ofLog()<<"Did it"<<endl;
+                        joint=NULL;
+                        breakJ=false;
+                        
+                    }
+                }
+                
+            }
+            // Hug
+            if(player1.grab && player2.grab){
+                //hug
+            }
+        }
+    }else{
+        player1.vault=false;
+        player1.net=false;
+        player1.toss=false;
+        player1.grab=false;
+        player2.vault=false;
+        player2.net=false;
+        player2.toss=false;
+        player2.grab=false;
+        if(breakJ==true){
+            //                    player1.grab=false;
+            //                    player2.grab=false;
+            box2d.world->DestroyJoint(joint);
+            // ofLog()<<"Did it"<<endl;
+            joint=NULL;
+            breakJ=false;
+        }
+        
+    }
+}
+
+//--------------------------------------------------------------
+
 void testApp::mouseMoved(int x, int y ){
 
 }
@@ -235,19 +313,4 @@ void testApp::contactEnd(ofxBox2dContactArgs &e) {
 //            player4.touchdown=NULL;
 //        }
 	}
-}
-
-//--------------------------------------------------------------
-void testApp::windowResized(int w, int h){
-
-}
-
-//--------------------------------------------------------------
-void testApp::gotMessage(ofMessage msg){
-
-}
-
-//--------------------------------------------------------------
-void testApp::dragEvent(ofDragInfo dragInfo){ 
-
 }
