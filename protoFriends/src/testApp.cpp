@@ -152,10 +152,12 @@ void testApp::axisChanged2(ofxGamepadAxisEvent &e){
         
         //LEFT JOYSTICK
         if (e.axis == 2)    mVal2.x=e.value;
-  //      if (e.axis == 3)    mVal2.y=e.value;
+        if (e.axis == 3)    mVal2.y=e.value;
         
         if (abs(mVal2.x)<stickBuffer)  mVal2.x=0;
- //       if (abs(mVal2.y)<stickBuffer)  mVal2.y=0;
+        if (abs(mVal2.y)<stickBuffer)  mVal2.y=0;
+        
+        
         
     }
     
@@ -163,11 +165,14 @@ void testApp::axisChanged2(ofxGamepadAxisEvent &e){
 //--------------------------------------------------------------
 void testApp::buttonPressed2(ofxGamepadButtonEvent &e){
     
-    if(e.button==11 && player2.grounded)player2.jump(-15);
+    if(e.button==12) player2.friendMode=false;
 
 }
 //--------------------------------------------------------------
 void testApp::buttonReleased2(ofxGamepadButtonEvent &e){
+    
+    if(e.button==11 && player2.grounded)player2.jump(-15);          // A Button
+    if(e.button==12) player2.friendMode=true;                      // B Button
     
 }
 //--------------------------------------------------------------
@@ -178,7 +183,7 @@ void testApp::p2p(){
         if(ofDist(player1.body->GetPosition().x,
                   player1.body->GetPosition().y,
                   player2.body->GetPosition().x,
-                  player2.body->GetPosition().y) < 2){
+                  player2.body->GetPosition().y) < 1){
             
             //Vaulting
             if(player1.vault){
@@ -197,7 +202,7 @@ void testApp::p2p(){
                     jointDef.bodyB=player2.body;
                     jointDef.localAnchorA.SetZero();
                     jointDef.localAnchorB.SetZero();
-                    jointDef.maxLength=1;
+                    jointDef.maxLength=.5f;
                     jointDef.collideConnected=false;
                     
                     joint=(b2RopeJoint*)box2d.world->CreateJoint(&jointDef);
